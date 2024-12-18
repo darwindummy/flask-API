@@ -35,7 +35,7 @@ def process_payload():
         )
 
         # Handle API response
-        if response.status_code == 202:
+        if response.status_code == 200:
             return (response.content, response.status_code, response.headers.items())
         else:
             return jsonify({
