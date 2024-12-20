@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return jsonify({"message": "Hello from Render!"})
+    return jsonify({"message": "Hello from Vansh!"})
 
 @app.route('/process', methods=['POST'])
 def process_payload():
@@ -50,7 +50,7 @@ def process_payload():
             "error": f"An exception occurred: {str(e)}"
         }), 500
 
-@app.route('/priyanshBhaiKeMaje',methods=['POST'])
+@app.route('/indeed',methods=['POST'])
 def payload():
     data = request.get_json()
         # URL of the Validation API
