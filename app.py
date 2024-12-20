@@ -50,7 +50,7 @@ def process_payload():
             "error": f"An exception occurred: {str(e)}"
         }), 500
 
-@app.route('/priyanshBhaiKeMaje',method=['POST'])
+@app.route('/priyanshBhaiKeMaje',methods=['POST'])
 def payload():
     data = request.get_json()
         # URL of the Validation API
