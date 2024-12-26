@@ -91,7 +91,7 @@ def payload():
             "error": f"An exception occurred: {str(e)}"
         }), 500
 
-@app.route('/deputy', methods=['POST'])
+@app.route('/deputy', methods=['GET'])
 def openURL():
     # Get incoming JSON payload
     incoming_data = request.get_json()
@@ -117,14 +117,16 @@ def openURL():
     # Log incoming headers and parameters
     logging.info("Incoming Headers: %s", incoming_headers)
     logging.info("Incoming Query Parameters: %s", incoming_params)
+    
+    payloadJson = {
+        "params" : incoming_params
+    }
 
     try:
         # Call the Deputy API with Basic Auth
         response = requests.post(
             api_url,
-            json=incoming_data,
-            headers=incoming_headers,  # Forward headers
-            params=incoming_params,   # Forward query parameters
+            json=payloadJson,
             auth=(api_username, api_password)  # Basic Auth
         )
 
