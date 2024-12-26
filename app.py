@@ -59,6 +59,12 @@ def payload():
     data = request.get_json()
         # URL of the Validation API
     api_url = "https://fermyon.darwinbox.in/eventlistener/external?id=a67650c17a8f8f"
+    logging.info("Incoming Json: %s",data)
+    
+    payloadJson = {
+        data
+    }
+    logging.info("json Upload: %s", payloadJson)
 
     # Retrieve credentials from environment variables
     api_username = os.getenv('API_USERNAME_priyansh')
@@ -71,7 +77,7 @@ def payload():
         # Call the API with Basic Auth
         response = requests.post(
             api_url,
-            json=data,
+            json=payloadJson,
             auth=(api_username, api_password)  # Basic Auth
         )
 
