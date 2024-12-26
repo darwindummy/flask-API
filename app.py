@@ -1,8 +1,12 @@
 import os
 import requests
 from flask import Flask, request, jsonify
+import logging
 
 app = Flask(__name__)
+# Configure logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
 
 @app.route('/')
 def home():
@@ -87,5 +91,69 @@ def payload():
             "error": f"An exception occurred: {str(e)}"
         }), 500
 
+@app.route('/deputy', methods=['POST'])
+def openURL():
+    # Get incoming JSON payload
+    incoming_data = request.get_json()
+
+    # Log incoming payload
+    logging.info("Incoming JSON Payload: %s", incoming_data)
+
+    # URL of the Deputy API
+    api_url = "https://fermyon.darwinbox.in/eventlistener/external?id=a67650c17a8f8f"
+
+    # Retrieve credentials from environment variables
+    api_username = os.getenv('API_USERNAME_priyansh')
+    api_password = os.getenv('API_PASSWORD_priyansh')
+
+    if not api_username or not api_password:
+        logging.error("API credentials are not configured")
+        return jsonify({"error": "API credentials not configured"}), 500
+
+    # Collect headers and parameters
+    incoming_headers = {key: value for key, value in request.headers.items()}
+    incoming_params = request.args.to_dict()
+
+    # Log incoming headers and parameters
+    logging.info("Incoming Headers: %s", incoming_headers)
+    logging.info("Incoming Query Parameters: %s", incoming_params)
+
+    try:
+        # Call the Deputy API with Basic Auth
+        response = requests.post(
+            api_url,
+            json=incoming_data,
+            headers=incoming_headers,  # Forward headers
+            params=incoming_params,   # Forward query parameters
+            auth=(api_username, api_password)  # Basic Auth
+        )
+
+        # Log the Deputy API response
+        logging.info("Deputy API Response Status Code: %s", response.status_code)
+        logging.info("Deputy API Response Headers: %s", dict(response.headers))
+        logging.info("Deputy API Response Text: %s", response.text)
+
+        # Handle API response
+        if response.status_code == 200:
+            return (
+                response.content,
+                response.status_code,
+                response.headers.items()
+            )
+        else:
+            logging.error("Failed to call the Deputy API: %s", response.text)
+            return jsonify({
+                "status": "failure",
+                "error": "Failed to call the Deputy API",
+                "status_code": response.status_code,
+                "response_text": response.text
+            }), response.status_code
+    except requests.exceptions.RequestException as e:
+        logging.exception("An exception occurred while calling the Deputy API")
+        return jsonify({
+            "status": "failure",
+            "error": f"An exception occurred: {str(e)}"
+        }), 500
+            
 if __name__ == '__main__':
     app.run(debug=True)
