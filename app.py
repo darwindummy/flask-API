@@ -93,11 +93,11 @@ def payload():
 
 @app.route('/deputy', methods=['GET'])
 def openURL():
-    # Get incoming JSON payload
-    incoming_data = request.get_json()
+    # # Get incoming JSON payload
+    # incoming_data = request.get_json()
 
-    # Log incoming payload
-    logging.info("Incoming JSON Payload: %s", incoming_data)
+    # # Log incoming payload
+    # logging.info("Incoming JSON Payload: %s", incoming_data)
 
     # URL of the Deputy API
     api_url = "https://fermyon.darwinbox.in/eventlistener/external?id=a67650c17a8f8f"
