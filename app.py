@@ -58,7 +58,8 @@ def process_payload():
 def payload():
     data = request.get_json()
         # URL of the Validation API
-    api_url = "https://fermyon.darwinbox.in/eventlistener/external?id=a67650c17a8f8f"
+    # api_url = "https://fermyon.darwinbox.in/eventlistener/external?id=a67650c17a8f8f"
+    api_url = "https://connectors.darwinbox.in/eventlistener/external?id=a676d45df8000e"
     logging.info("Incoming Json: %s",data)
     
     payloadJson = {
@@ -67,8 +68,10 @@ def payload():
     logging.info("json Upload: %s", payloadJson)
 
     # Retrieve credentials from environment variables
-    api_username = os.getenv('API_USERNAME_priyansh')
-    api_password = os.getenv('API_PASSWORD_priyansh')
+    # api_username = os.getenv('API_USERNAME_priyansh')
+    # api_password = os.getenv('API_PASSWORD_priyansh')
+    api_username = os.getenv('API_USERNAME_priyansh_con')
+    api_password = os.getenv('API_PASSWORD_priyansh_con')
 
     if not api_username or not api_password:
         return jsonify({"error": "API credentials not configured"}), 500
