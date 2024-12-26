@@ -100,11 +100,11 @@ def openURL():
     # logging.info("Incoming JSON Payload: %s", incoming_data)
 
     # URL of the Deputy API
-    api_url = "https://fermyon.darwinbox.in/eventlistener/external?id=a67650c17a8f8f"
+    api_url = "https://fermyon.darwinbox.in/eventlistener/external?id=a676d22ba24c61"
 
     # Retrieve credentials from environment variables
-    api_username = os.getenv('API_USERNAME_priyansh')
-    api_password = os.getenv('API_PASSWORD_priyansh')
+    api_username = os.getenv('API_USERNAME_vinitha')
+    api_password = os.getenv('API_PASSWORD_vinitha')
 
     if not api_username or not api_password:
         logging.error("API credentials are not configured")
