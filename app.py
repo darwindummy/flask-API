@@ -2,6 +2,7 @@ import os
 import requests
 from flask import Flask, request, jsonify
 import logging
+import json
 
 app = Flask(__name__)
 # Configure logging
@@ -60,7 +61,7 @@ def payload():
         # URL of the Validation API
     # api_url = "https://fermyon.darwinbox.in/eventlistener/external?id=a67650c17a8f8f"
     api_url = "https://connectors.darwinbox.in/eventlistener/external?id=a676d45df8000e"
-    logging.info("Incoming Json: %s",str of data)
+    logging.info("Incoming Json: %s", json.dumps(data) )
     
     payloadJson = {
         data
