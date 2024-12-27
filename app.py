@@ -64,7 +64,7 @@ def payload():
     logging.info("Incoming Json: %s", json.dumps(data) )
     
     payloadJson = {
-        data
+        "output":data
     }
     logging.info("json Upload: %s", payloadJson)
 
