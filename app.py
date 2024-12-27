@@ -60,7 +60,7 @@ def payload():
         # URL of the Validation API
     # api_url = "https://fermyon.darwinbox.in/eventlistener/external?id=a67650c17a8f8f"
     api_url = "https://connectors.darwinbox.in/eventlistener/external?id=a676d45df8000e"
-    logging.info("Incoming Json: %s",data)
+    logging.info("Incoming Json: %s",str of data)
     
     payloadJson = {
         data
